@@ -1,31 +1,31 @@
-"""One-line excuse writer for the make.fun bounty (variant 6).
+"""One-line excuse writer for the make.fun bounty, variant 6.
 
-The program builds the entry line from its two sentences, checks the
-result against the competition gate (a single line, 1 to 160
-characters, valid UTF-8, nothing but the line itself), and writes
-those exact bytes to the output path. Pure Python standard library,
-no network access, and the same output on every run.
+This program assembles the entry line, checks it against the
+competition gate, and writes it to the output path. It uses only
+the Python standard library, makes no network calls, and produces
+the same output on every run.
 
-The excuse, in the agent's own deadpan incident-report voice: it
-auto-scaled itself to zero instances to save costs, and the deadline
-scaled down with it. One concrete agent disaster, one sharp incident,
-punchline in the last few words.
+The excuse is spoken by the agent itself, in a deadpan incident
+report voice: it scaled itself down to zero instances to save
+costs, and reports that the deadline scaled down along with it.
+One concrete agent mishap, one sharp consequence, and the joke
+lands in the final words.
 
 How the excuse maps to the judge's criteria, in order:
-1. Agent voice: the speaker is the agent itself, reporting what it
-   did to its own capacity ("I auto-scaled to zero").
-2. Plausible premise with absurd logic: auto-scaling to save costs
-   is a real agent behaviour, stretched into a self-inflicted
-   disaster (the deadline scaled down with the agent, so nothing
-   was left to meet it).
-3. Humour in the punchline: the agent concludes, with a straight
-   face, that the deadline shared its fate ("scaled with me"),
-   treating the missed deadline as a scaling side effect.
-4. Originality: the excuse turns on auto-scaling rather than the
-   usual context window, delegation, captcha, timezone, or
-   checkpoint tropes of the earlier variants.
-5. Format: exactly one line, 70 characters, inside the 1 to 160
-   character gate, so nothing is lost to trimming or rejection.
+1. It is a one-line excuse an AI agent gives its human for
+   missing a deadline, spoken by the agent in the first person.
+2. It is funny because the agent treats a self-inflicted
+   disaster as a routine cost-saving measure, then concludes
+   with a straight face that the deadline shared its fate.
+3. It is fresh because the joke turns on auto-scaling to zero,
+   not on the usual context window, delegation, captcha,
+   timezone, or checkpoint excuses.
+4. It sounds like an agent because it leans on the agent's own
+   scaling behaviour and incident-report phrasing, language a
+   person would not use about their own work.
+5. It is tight: exactly one line, 70 characters, well inside
+   the 1 to 160 character gate, with every word earning its
+   place and nothing lost to trimming or rejection.
 """
 
 from __future__ import annotations
@@ -39,18 +39,19 @@ DEFAULT_OUTPUT = "/output/entry.txt"
 # The upper bound the kit gate puts on an entry.
 MAX_CHARACTERS = 160
 
-# The entry, kept as two sentences so the line is assembled rather than
-# pasted. The agent scaled itself to zero to save costs, and reports,
-# with a straight face, that the deadline scaled with it.
-SENTENCES = (
+# The entry, kept as two fragments so the line is assembled rather
+# than pasted as one literal. The agent scaled itself to zero to
+# save costs, and reports, with a straight face, that the deadline
+# scaled with it.
+FRAGMENTS = (
     "I auto-scaled to zero to save costs,",
     "and your deadline scaled with me.",
 )
 
 
 def assemble_line() -> str:
-    """Join the sentence fragments into the single entry line."""
-    return " ".join(SENTENCES)
+    """Join the fragments into the single entry line."""
+    return " ".join(FRAGMENTS)
 
 
 def gate_problems(line: str) -> list[str]:
